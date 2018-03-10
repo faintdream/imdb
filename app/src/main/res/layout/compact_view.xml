@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/someid"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/posterIV"
+        android:layout_width="185dp"
+        android:layout_height="185dp"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        android:id="@+id/movieNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/posterIV"
+        android:layout_toRightOf="@+id/posterIV"
+        android:text="movieAdapter @string/app_name" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movieNameTV"
+        android:layout_toEndOf="@+id/posterIV"
+        android:layout_toRightOf="@+id/posterIV"
+        android:text="Released on: " />
+
+    <TextView
+        android:id="@+id/releasedateTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movieNameTV"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/posterIV"
+        android:text="somedate date" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_toEndOf="@+id/posterIV"
+        android:layout_toRightOf="@+id/posterIV"
+        android:text="Popularity : " />
+
+    <TextView
+        android:id="@+id/popularityTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="votes" />
+
+    <ImageView
+        android:id="@+id/starIconIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_toEndOf="@+id/posterIV"
+        android:layout_toRightOf="@+id/posterIV"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/votesTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/popularityTV"
+        android:layout_below="@+id/popularityTV"
+        android:layout_marginTop="12dp"
+        android:text="(0.0/100) voted by 1542, users " />
+
+</RelativeLayout>
