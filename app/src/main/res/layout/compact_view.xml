@@ -2,15 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/someid"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/posterIV"
-        android:layout_width="185dp"
-        android:layout_height="185dp"
-        android:layout_alignParentTop="true"
-        />
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="false" />
 
     <TextView
         android:id="@+id/movieNameTV"
@@ -59,8 +58,8 @@
 
     <ImageView
         android:id="@+id/starIconIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_below="@+id/textView4"
         android:layout_toEndOf="@+id/posterIV"
         android:layout_toRightOf="@+id/posterIV"
@@ -70,9 +69,11 @@
         android:id="@+id/votesTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/popularityTV"
-        android:layout_below="@+id/popularityTV"
-        android:layout_marginTop="12dp"
+        android:layout_alignBottom="@+id/starIconIV"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/starIconIV"
+        android:layout_toRightOf="@+id/starIconIV"
         android:text="(0.0/100) voted by 1542, users " />
 
 </RelativeLayout>
