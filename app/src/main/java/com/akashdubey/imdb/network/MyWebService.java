@@ -20,6 +20,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.akashdubey.imdb.MainActivity.movieAdapter;
 import static com.akashdubey.imdb.MainActivity.recyclerView;
 import static com.akashdubey.imdb.model.MovieModel.movieModelList;
 //import static com.akashdubey.imdb.model.MovieModel;
@@ -75,7 +76,7 @@ public class MyWebService {
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         jsonObject = jsonArray.getJSONObject(i);
-                        String imgBaseUrl = "https://image.tmdb.org/t/p/w185" + jsonObject.getString(MOVIE_IMAGE);
+                        String imgBaseUrl = "https://image.tmdb.org/t/p/w45" + jsonObject.getString(MOVIE_IMAGE);
                         movieModelList.add(new MovieModel(
                                         jsonObject.getString(MOVIE_TITLE),
                                         jsonObject.getString(RELEASE_DATE),
@@ -105,7 +106,11 @@ public class MyWebService {
     }
 
     public void getUpcomingMovies() {
-        movieModelList.clear();
+
+        if(movieModelList.isEmpty()==false){
+            movieModelList.clear();
+        }
+
         String url = URL_UPCOMING_MOVIES;
         request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -248,6 +253,8 @@ public class MyWebService {
 
     }
 
+
+
     public void getTopRatedMovies() {
         movieModelList.clear();
         String url = URL_TOP_RATED_MOVIES;
@@ -298,11 +305,10 @@ public class MyWebService {
 
 
     private void publishResult(List<MovieModel> movieModelList) {
-        MainActivity mainActivity = new MainActivity();
+//        MainActivity mainActivity = new MainActivity();
+        movieAdapter = new MovieAdapter(movieModelList);
         recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
-        MovieAdapter movieAdapter = new MovieAdapter(movieModelList);
         movieAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(movieAdapter);
-
     }
 }

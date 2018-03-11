@@ -27,9 +27,11 @@ public class MovieModel {
 
     }
 
-    public static List<MovieModel> movieModelList = new ArrayList<>();
 
-    public String getmTitle() {
+
+    public  static List<MovieModel> movieModelList = new ArrayList<>();
+
+    public   String getmTitle() {
         return mTitle;
     }
 

@@ -2,6 +2,7 @@ package com.akashdubey.imdb;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -10,20 +11,30 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.akashdubey.imdb.adapter.MovieAdapter;
 import com.akashdubey.imdb.network.MyWebService;
 
+import static com.akashdubey.imdb.model.MovieModel.movieModelList;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    static public RecyclerView recyclerView;
+public static RecyclerView recyclerView;
+    public static MovieAdapter movieAdapter;
     MyWebService myWebService ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         recyclerView = findViewById(R.id.recyclerview1);
         myWebService= new MyWebService();
         myWebService.getUpcomingMovies();
 
+
+
     }
+
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -37,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menuInflater.inflate(R.menu.in_app_choices, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
