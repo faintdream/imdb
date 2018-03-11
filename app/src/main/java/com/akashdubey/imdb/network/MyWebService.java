@@ -46,6 +46,7 @@ public class MyWebService {
     public static final String MOVIE_IMAGE = "poster_path";
     public static final String MOVIE_TITLE = "title";
     public static final String RELEASE_DATE = "release_date";
+    public static final String MOVIE_ID = "id";
 
 
     public MainActivity mainActivity = new MainActivity();
@@ -56,7 +57,7 @@ public class MyWebService {
 
     public void getMostPopularMovies() {
         movieModelList.clear();
-        String url =URL_POPULAR_MOVIES;
+        String url = URL_POPULAR_MOVIES;
         request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -81,7 +82,8 @@ public class MyWebService {
                                         jsonObject.getString(POPULARITY),
                                         jsonObject.getString(VOTE_COUNT),
                                         imgBaseUrl,
-                                        jsonObject.getString(VOTE_AVERAGE)
+                                        jsonObject.getString(VOTE_AVERAGE),
+                                        jsonObject.getString(MOVIE_ID)
                                 )
                         );
                     }
@@ -100,13 +102,11 @@ public class MyWebService {
         });
 
 
-
-
     }
 
     public void getUpcomingMovies() {
         movieModelList.clear();
-        String url =URL_UPCOMING_MOVIES;
+        String url = URL_UPCOMING_MOVIES;
         request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -131,7 +131,8 @@ public class MyWebService {
                                         jsonObject.getString(POPULARITY),
                                         jsonObject.getString(VOTE_COUNT),
                                         imgBaseUrl,
-                                        jsonObject.getString(VOTE_AVERAGE)
+                                        jsonObject.getString(VOTE_AVERAGE),
+                                        jsonObject.getString(MOVIE_ID)
                                 )
                         );
                     }
@@ -153,7 +154,7 @@ public class MyWebService {
 
     public void getLatestMovies() {
         movieModelList.clear();
-        String url =URL_LATEST_MOVIES;
+        String url = URL_LATEST_MOVIES;
         request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -178,11 +179,12 @@ public class MyWebService {
                                         jsonObject.getString(POPULARITY),
                                         jsonObject.getString(VOTE_COUNT),
                                         imgBaseUrl,
-                                        jsonObject.getString(VOTE_AVERAGE)
+                                        jsonObject.getString(VOTE_AVERAGE),
+                                        jsonObject.getString(MOVIE_ID)
                                 )
                         );
                     }
-                    MainActivity mainActivity=new MainActivity();
+                    MainActivity mainActivity = new MainActivity();
                     mainActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -200,7 +202,7 @@ public class MyWebService {
 
     public void getNowPlayingMovies() {
         movieModelList.clear();
-        String url =URL_NOW_PALYING_MOVIES;
+        String url = URL_NOW_PALYING_MOVIES;
         request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -225,7 +227,7 @@ public class MyWebService {
                                         jsonObject.getString(POPULARITY),
                                         jsonObject.getString(VOTE_COUNT),
                                         imgBaseUrl,
-                                        jsonObject.getString(VOTE_AVERAGE)
+                                        jsonObject.getString(VOTE_AVERAGE), jsonObject.getString(MOVIE_ID)
                                 )
                         );
                     }
@@ -246,10 +248,9 @@ public class MyWebService {
 
     }
 
-    public void getTopRatedMovies()
-    {
+    public void getTopRatedMovies() {
         movieModelList.clear();
-        String url =URL_TOP_RATED_MOVIES;
+        String url = URL_TOP_RATED_MOVIES;
         request = new Request.Builder().url(url).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -274,7 +275,8 @@ public class MyWebService {
                                         jsonObject.getString(POPULARITY),
                                         jsonObject.getString(VOTE_COUNT),
                                         imgBaseUrl,
-                                        jsonObject.getString(VOTE_AVERAGE)
+                                        jsonObject.getString(VOTE_AVERAGE),
+                                        jsonObject.getString(MOVIE_ID)
                                 )
                         );
                     }
@@ -296,7 +298,7 @@ public class MyWebService {
 
 
     private void publishResult(List<MovieModel> movieModelList) {
-        MainActivity mainActivity= new MainActivity();
+        MainActivity mainActivity = new MainActivity();
         recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
         MovieAdapter movieAdapter = new MovieAdapter(movieModelList);
         movieAdapter.notifyDataSetChanged();

@@ -10,19 +10,20 @@ import java.util.List;
 
 public class MovieModel {
 
-    private String mTitle,mReleaseDate,mPopularity,mVotesCount,mMovieImage,mVoteAverage;
+    private String mTitle,mReleaseDate,mPopularity,mVotesCount,mMovieImage,mVoteAverage,mId;
 
     public String getmVoteAverage() {
         return mVoteAverage;
     }
 
-    public MovieModel(String mTitle, String mReleaseDate, String mPopularity, String mVotesCount, String mMovieImage, String mVoteAverage) {
+    public MovieModel(String mTitle, String mReleaseDate, String mPopularity, String mVotesCount, String mMovieImage, String mVoteAverage, String mId) {
         this.mTitle = mTitle;
         this.mReleaseDate = mReleaseDate;
         this.mPopularity = mPopularity;
         this.mVotesCount = mVotesCount;
         this.mMovieImage = mMovieImage;
         this.mVoteAverage=mVoteAverage;
+        this.mId=mId;
 
     }
 
@@ -47,6 +48,8 @@ public class MovieModel {
     public String getmMovieImage() {
         return mMovieImage;
     }
+
+    public String getmId() {  return mId;    }
 
     public static List<MovieModel> getMovieModel() {
         return movieModelList;
