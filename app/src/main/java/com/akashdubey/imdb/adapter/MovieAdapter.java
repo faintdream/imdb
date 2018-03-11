@@ -25,31 +25,25 @@ import static com.akashdubey.imdb.MainActivity.movieAdapter;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
 
-
-
     private List<MovieModel> movieAdapterItem;
 
     public MovieAdapter(List<MovieModel> movieModelList) {
-
         this.movieAdapterItem = movieModelList;
     }
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.compact_view, parent, false);
-
         return new MyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MyHolder holder, final int position) {
 
-//        MovieModel movieModel = movieAdapterItem.get(position);
-        MovieModel movieModel = MovieModel.movieModelList.get(position);
+        final MovieModel movieModel = movieAdapterItem.get(position);
         Glide.with(holder.movieImage.getContext()).load(movieModel.getmMovieImage()).into(holder.movieImage);
-        holder.movieTitle.setText(movieAdapterItem.get(position).getmTitle());
+        holder.movieTitle.setText(movieModel.getmTitle());
         holder.releaseDate.setText(movieModel.getmReleaseDate());
         holder.popularity.setText(movieModel.getmPopularity());
         holder.votesCount.setText(movieModel.getmVoteAverage() + "/ 10 voted by " + movieModel.getmVotesCount() + " ");
@@ -57,14 +51,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                MovieModel movieModel = movieAdapterItem.get(position);
-
-                Log.i("LEGO", "MOVIE NAME " + movieAdapterItem.get(position).getmTitle() + " ID " + movieAdapterItem.get(position).getmTitle());
-
-//
-//
-// Toast.makeText(, "Movie ID "+movieAdapterItem.get(position).getmId()
-//                        +" Movie Name "+ movieAdapterItem.get(position).getmTitle(), Toast.LENGTH_SHORT).show();
+                Log.i("LEGO","ID "+movieModel.getmId()+", NAME "+movieModel.getmTitle());
             }
         });
     }
@@ -86,8 +73,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
             releaseDate = itemView.findViewById(R.id.releasedateTV);
             popularity = itemView.findViewById(R.id.popularityTV);
             votesCount = itemView.findViewById(R.id.votesTV);
-
-            return;
         }
 
 
