@@ -2,6 +2,7 @@ package com.akashdubey.imdb.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,7 +55,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
             @Override
             public void onClick(View view) {
                 Log.i("LEGO","ID "+movieModel.getmId()+", NAME "+movieModel.getmTitle());
-                jumpScreen(holder.itemView);
+                jumpScreen(holder.itemView,movieModel.getmId().toString());
 
             }
         });
@@ -82,9 +83,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
 
 
     }
-    public void jumpScreen(View view){
+    public void jumpScreen(View view,String movieId){
         Intent intent=new Intent(view.getContext(),DetailsScreen.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("movieId",movieId);
+        intent.putExtras(bundle);
+
         view.getContext().startActivity(intent);
+
     }
 }
 
