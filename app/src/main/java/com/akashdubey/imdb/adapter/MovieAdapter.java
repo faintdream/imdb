@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +46,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
         Glide.with(holder.movieImage.getContext()).load(movieModel.getmMovieImage()).into(holder.movieImage);
         holder.movieTitle.setText(movieModel.getmTitle());
         holder.releaseDate.setText(movieModel.getmReleaseDate());
-        holder.popularity.setText(movieModel.getmPopularity());
         holder.votesCount.setText(movieModel.getmVoteAverage() + "/ 10 voted by " + movieModel.getmVotesCount() + " ");
-
+        holder.ratings.setRating(Float.parseFloat(movieModel.getmVoteAverage().toString())/2);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +63,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
 
 
     public class MyHolder extends RecyclerView.ViewHolder {
+        RatingBar ratings;
         ImageView movieImage;
         TextView movieTitle, releaseDate, popularity, votesCount;
 
@@ -71,8 +72,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
             movieImage = itemView.findViewById(R.id.posterIV);
             movieTitle = itemView.findViewById(R.id.movieNameTV);
             releaseDate = itemView.findViewById(R.id.releasedateTV);
-            popularity = itemView.findViewById(R.id.popularityTV);
             votesCount = itemView.findViewById(R.id.votesTV);
+            ratings=itemView.findViewById(R.id.ratingsRB);
         }
 
 
