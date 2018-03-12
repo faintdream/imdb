@@ -1,6 +1,7 @@
 package com.akashdubey.imdb.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.akashdubey.imdb.DetailsScreen;
 import com.akashdubey.imdb.MainActivity;
 import com.akashdubey.imdb.R;
 import com.akashdubey.imdb.model.MovieModel;
@@ -40,7 +42,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MyHolder holder, final int position) {
+    public void onBindViewHolder(final MyHolder holder, final int position) {
 
         final MovieModel movieModel = movieAdapterItem.get(position);
         Glide.with(holder.movieImage.getContext()).load(movieModel.getmMovieImage()).into(holder.movieImage);
@@ -52,6 +54,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
             @Override
             public void onClick(View view) {
                 Log.i("LEGO","ID "+movieModel.getmId()+", NAME "+movieModel.getmTitle());
+                jumpScreen(holder.itemView);
+
             }
         });
     }
@@ -78,4 +82,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
 
 
     }
+    public void jumpScreen(View view){
+        Intent intent=new Intent(view.getContext(),DetailsScreen.class);
+        view.getContext().startActivity(intent);
+    }
 }
+
+
