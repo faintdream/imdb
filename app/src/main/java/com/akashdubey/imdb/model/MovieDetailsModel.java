@@ -9,16 +9,16 @@ import java.util.List;
  * This class handles mode for detailed Movie list and associated methods
  */
 
-public class PosterModel {
-    public String mTitle,mReleaseDate,mPopularity,mFavouriteUsers,
+public class MovieDetailsModel {
+    private String mTitle,mReleaseDate,mPopularity,mFavouriteUsers,
             mPosterImage,mVoteAverage,mOverview,mBudget,mRevenue,
             mTrailer,mCast,mCrew;
-    public boolean isFavourite,isWatchLater;
-    public RatingBar ratings;
-    public static List<PosterModel> posterModelList= new ArrayList<>();
+    private boolean isFavourite,isWatchLater;
+    private RatingBar ratings;
+    private static List<MovieDetailsModel> movieDetailsModelList = new ArrayList<>();
 
-    public static List<PosterModel> getPosterModelList() {
-        return posterModelList;
+    public static List<MovieDetailsModel> getMovieDetailsModelList() {
+        return movieDetailsModelList;
     }
 
     public String getmTitle() {

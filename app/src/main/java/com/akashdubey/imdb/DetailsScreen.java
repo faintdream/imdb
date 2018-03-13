@@ -7,19 +7,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 /**
- * Created by homepc on 12-03-2018.
+ * This class loads the UI for details screen and set the movie id for
+ * further processing
  */
 
 public class DetailsScreen extends AppCompatActivity {
+    MovieIdListener movieIdListener;
+    String movieId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailed_view);
-
+        movieId=getIntent().getExtras().getString("movieId");
+        movieIdListener.setMovieId(movieId);
 //        Intent intent= new Intent();
 //        Bundle bundle=intent.getExtras();
 
         Toast.makeText(this, "Movie Id "+getIntent().getExtras().getString("movieId"), Toast.LENGTH_LONG).show();
     }
 
+    public interface MovieIdListener{
+        public String setMovieId(String id);
+    }
 }
