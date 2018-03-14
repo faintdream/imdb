@@ -1,8 +1,12 @@
 package com.akashdubey.imdb.network;
 
 import android.util.Log;
+
+import com.akashdubey.imdb.model.MovieDetailsModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -11,31 +15,39 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.akashdubey.imdb.model.MovieDetailsModel.movieDetailsModelList;
+
 /**
  * Created by homepc on 13-03-2018.
  */
 
 public class MovieDetailsService {
 
+//    private String mTitle, mReleaseDate,
+//            mPosterImage, mVoteAverage, mOverview, mBudget, mRevenue,
+//            mTrailerImage, mCastImage, mCrewImage, mVoteCount;
+    private boolean isFavourite, isWatchLater;
 
     private static final String BUDGET = "budget";
-    private static final String REVENUE = "TBD";
+    private static final String REVENUE = "revenue";
     private static final String TITLE = "original_title";
     private static final String OVERVIEW = "overview";
-    private static final String RELEASE_DATE = "TBD";
-    private static final String VOTE_AVERAGE = "TBD";
+    private static final String RELEASE_DATE = "release_date";
+    private static final String VOTE_AVERAGE = "vote_average";
+    private static final String VOTE_COUNT = "vote_count";
 
 
-    public static String movieId = "19404";
+    public static String movieId = "CRAP_BY_AKASH";
     private String movieDetailUrl
             = "http://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c";
     private String posterUrl
-            = "http://api.themoviedb.org/3/movie/" + movieId + "/images?api_key=8496be0b2149805afa458ab8ec27560c";
-    private String castCrewUrl
-            = "http://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=8496be0b2149805afa458ab8ec27560c";
+            = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c&append_to_response=images";
+    private String castUrl
+            = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c&append_to_response=cast";
+    private String crewUrl
+            = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c&append_to_response=crew";
     private String trailerUrl
-            = "http://api.themoviedb.org/3/movie/" + movieId + "/videos?api_key=8496be0b2149805afa458ab8ec27560c";
-
+            = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c&append_to_response=trailer";
     private String dynamicImageURL = "TBD.jpeg";
     private String imageBaseUrl =
             "http://image.tmdb.org/t/p/w500/" + dynamicImageURL;
@@ -44,10 +56,10 @@ public class MovieDetailsService {
     OkHttpClient okHttpClient = new OkHttpClient();
     Request request;
     JSONObject jsonObject;
+//    public static MovieDetailsModel movieDetailsModel;
 
     public void getMovieDetail() {
         String url = movieDetailUrl;
-
         request = new Request.Builder().url(url).build(); // building the http request okHttp way
         okHttpClient.newCall(request).enqueue(new Callback() { //sending the request in separate child thread
             @Override
@@ -60,8 +72,23 @@ public class MovieDetailsService {
                 String myResponse = response.body().string().toString(); // collecting the result in String object
                 try {
                     jsonObject = new JSONObject(myResponse);
-
-                    Log.i("LEGO", jsonObject.getString(TITLE));
+//                    mTitle = jsonObject.getString(TITLE);
+//                    mReleaseDate = jsonObject.getString(RELEASE_DATE);
+//                    mVoteCount = jsonObject.getString(VOTE_COUNT);
+//                    mVoteAverage = jsonObject.getString(VOTE_AVERAGE);
+//                    mOverview = jsonObject.getString(OVERVIEW);
+//                    mBudget = jsonObject.getString(BUDGET);
+//                    mRevenue = jsonObject.getString(REVENUE);
+                    movieDetailsModelList.add(new MovieDetailsModel(
+                                    jsonObject.getString(TITLE),
+                                    jsonObject.getString(RELEASE_DATE),
+                                    jsonObject.getString(VOTE_AVERAGE),
+                                    jsonObject.getString(OVERVIEW),
+                                    jsonObject.getString(BUDGET),
+                                    jsonObject.getString(REVENUE),
+                                    jsonObject.getString(VOTE_COUNT)
+                            )
+                    );
 
                 } catch (JSONException e) {
                     e.printStackTrace();

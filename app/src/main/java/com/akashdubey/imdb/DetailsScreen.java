@@ -21,15 +21,13 @@ public class DetailsScreen extends AppCompatActivity implements MovieIdListener{
     String movieId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailed_view);
         movieId=getIntent().getExtras().getString("movieId");
         movieIdListener.setMovieId(movieId);
         MovieDetailsService movieDetailsService= new MovieDetailsService();
         movieDetailsService.getMovieDetail();
-//        Intent intent= new Intent();
-//        Bundle bundle=intent.getExtras();
+
 
         Toast.makeText(this, "Movie Id "+getIntent().getExtras().getString("movieId"), Toast.LENGTH_LONG).show();
     }
