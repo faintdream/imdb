@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/movieDetailRV"/>
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/relativeview1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/dtlPosterIV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:srcCompat="@mipmap/ic_launcher" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/dtlMovieTitleTV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_toEndOf="@+id/dtlReleaseDateTV"-->
+                    <!--android:layout_toRightOf="@+id/dtlReleaseDateTV"-->
+                    <!--android:text="Movie Name" />-->
+
+                <!--<RatingBar-->
+                    <!--android:id="@+id/dtlRatingsRB"-->
+                    <!--style="@style/Widget.AppCompat.RatingBar.Small"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/dtlMovieTitleTV"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_toEndOf="@id/dtlPosterIV"-->
+                    <!--android:layout_toRightOf="@id/dtlPosterIV"-->
+                    <!--android:numStars="5"-->
+                    <!--android:stepSize="0.5" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/dtlOverviewTV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/dtlRatingsRB"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_toEndOf="@id/dtlPosterIV"-->
+                    <!--android:layout_toRightOf="@id/dtlPosterIV"-->
+                    <!--android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/dtlReleaseDateTV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/dtlOverviewTV"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_toEndOf="@id/dtlPosterIV"-->
+                    <!--android:layout_toRightOf="@id/dtlPosterIV"-->
+                    <!--android:text="12-07-1983" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/dtlBudgetTV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/dtlReleaseDateTV"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_toEndOf="@id/dtlPosterIV"-->
+                    <!--android:layout_toRightOf="@id/dtlPosterIV"-->
+                    <!--android:text="1.25 Cr " />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/dtlRevenueTV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/dtlBudgetTV"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_toEndOf="@id/dtlPosterIV"-->
+                    <!--android:layout_toRightOf="@id/dtlPosterIV"-->
+                    <!--android:text="10.00 Cr " />-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/dtlStarIV"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_below="@+id/dtlPosterIV"-->
+                    <!--app:srcCompat="@drawable/star" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/dtlVoteAverageTV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@id/dtlPosterIV"-->
+                    <!--android:layout_toEndOf="@+id/dtlStarIV"-->
+                    <!--android:layout_toRightOf="@+id/dtlStarIV"-->
+                    <!--android:text="(4.7/10)" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/dtlVoteCountTV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignEnd="@+id/dtlPosterIV"-->
+                    <!--android:layout_alignRight="@+id/dtlPosterIV"-->
+                    <!--android:layout_below="@+id/dtlVoteAverageTV"-->
+                    <!--android:text="99999 users" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/dtlFullOverviewTV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/dtlRevenueTV"-->
+                    <!--android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/dtlFavouriteIV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/dtlFullOverviewTV"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--app:srcCompat="@drawable/favorite_disable" />-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/dtlWatchLaterIV"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/dtlFullOverviewTV"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_toEndOf="@+id/dtlFavouriteIV"-->
+                    <!--android:layout_toRightOf="@id/dtlFavouriteIV"-->
+                    <!--app:srcCompat="@drawable/watchlist_disable" />-->
+            <!--</RelativeLayout>-->
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/dtlArrow1IV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/dtlPosterLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@id/dtlArrow1IV"
+                    android:layout_toRightOf="@id/dtlArrow1IV"
+                    android:text="Posters" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/posterRV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dtlArrow1IV"
+                    android:layout_marginTop="21dp" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/dtlArrow2IV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/dtlTrailerLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@id/dtlArrow2IV"
+                    android:layout_toRightOf="@id/dtlArrow2IV"
+                    android:text="Trailers" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/trailerRV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dtlArrow2IV" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/dtlArrow3IV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/dtlCastLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@id/dtlArrow3IV"
+                    android:layout_toRightOf="@id/dtlArrow3IV"
+                    android:text="Casts" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/castRV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dtlArrow3IV" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/dtlArrow4IV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/dtlCrewLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@id/dtlArrow4IV"
+                    android:layout_toRightOf="@id/dtlArrow4IV"
+                    android:text="Crews" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/crewRV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dtlArrow4IV" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

@@ -11,6 +11,7 @@ import java.util.List;
 
 public class MovieDetailsModel {
     private String mTitle;
+    private  String mMovieImage;
     private String mReleaseDate;
     private String mPosterImage;
     private String mVoteAverage;
@@ -29,7 +30,8 @@ public class MovieDetailsModel {
 
 
 
-    public MovieDetailsModel(String mTitle, String mReleaseDate, String mVoteAverage, String mOverview, String mBudget, String mRevenue, String mVoteCount) {
+    public MovieDetailsModel(String mMovieImage, String mTitle, String mReleaseDate, String mVoteAverage, String mOverview, String mBudget, String mRevenue, String mVoteCount) {
+        this.mMovieImage=mMovieImage;
         this.mTitle = mTitle;
         this.mReleaseDate = mReleaseDate;
         this.mVoteAverage = mVoteAverage;
@@ -70,6 +72,10 @@ public class MovieDetailsModel {
 
     public String getmReleaseDate() {
         return mReleaseDate;
+    }
+
+    public String getmMovieImage() {
+        return mMovieImage;
     }
 
     public String getmPosterImage() {

@@ -88,7 +88,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
         Bundle bundle=new Bundle();
         bundle.putString("movieId",movieId);
         intent.putExtras(bundle);
-
         view.getContext().startActivity(intent);
 
     }

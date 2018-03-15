@@ -1,13 +1,17 @@
 package com.akashdubey.imdb.network;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 
+import com.akashdubey.imdb.DetailsScreen;
+import com.akashdubey.imdb.adapter.MovieDetailAdapter;
 import com.akashdubey.imdb.model.MovieDetailsModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -15,6 +19,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.akashdubey.imdb.DetailsScreen.movieDetailRV;
 import static com.akashdubey.imdb.model.MovieDetailsModel.movieDetailsModelList;
 
 /**
@@ -26,8 +31,11 @@ public class MovieDetailsService {
 //    private String mTitle, mReleaseDate,
 //            mPosterImage, mVoteAverage, mOverview, mBudget, mRevenue,
 //            mTrailerImage, mCastImage, mCrewImage, mVoteCount;
-    private boolean isFavourite, isWatchLater;
 
+    DetailsScreen detailsScreen= new DetailsScreen();
+    MovieDetailAdapter movieDetailAdapter;
+    private boolean isFavourite, isWatchLater;
+    private static final String MOVIE_IMAGE="poster_path";
     private static final String BUDGET = "budget";
     private static final String REVENUE = "revenue";
     private static final String TITLE = "original_title";
@@ -35,6 +43,7 @@ public class MovieDetailsService {
     private static final String RELEASE_DATE = "release_date";
     private static final String VOTE_AVERAGE = "vote_average";
     private static final String VOTE_COUNT = "vote_count";
+
 
 
     public static String movieId = "CRAP_BY_AKASH";
@@ -72,14 +81,11 @@ public class MovieDetailsService {
                 String myResponse = response.body().string().toString(); // collecting the result in String object
                 try {
                     jsonObject = new JSONObject(myResponse);
-//                    mTitle = jsonObject.getString(TITLE);
-//                    mReleaseDate = jsonObject.getString(RELEASE_DATE);
-//                    mVoteCount = jsonObject.getString(VOTE_COUNT);
-//                    mVoteAverage = jsonObject.getString(VOTE_AVERAGE);
-//                    mOverview = jsonObject.getString(OVERVIEW);
-//                    mBudget = jsonObject.getString(BUDGET);
-//                    mRevenue = jsonObject.getString(REVENUE);
+                    dynamicImageURL=jsonObject.getString(MOVIE_IMAGE);
+                    imageBaseUrl =
+                            "http://image.tmdb.org/t/p/w500/" + dynamicImageURL;
                     movieDetailsModelList.add(new MovieDetailsModel(
+                                    imageBaseUrl,
                                     jsonObject.getString(TITLE),
                                     jsonObject.getString(RELEASE_DATE),
                                     jsonObject.getString(VOTE_AVERAGE),
@@ -87,8 +93,17 @@ public class MovieDetailsService {
                                     jsonObject.getString(BUDGET),
                                     jsonObject.getString(REVENUE),
                                     jsonObject.getString(VOTE_COUNT)
+
                             )
                     );
+
+                    detailsScreen.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            publishResultMovieDetail(movieDetailsModelList);
+                        }
+                    });
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -117,7 +132,16 @@ public class MovieDetailsService {
 
     }
 
+    public void publishResultMovieDetail(List<MovieDetailsModel> movieDetailsModelList) {
+        movieDetailAdapter = new MovieDetailAdapter(movieDetailsModelList);
+        movieDetailRV.setLayoutManager(new LinearLayoutManager(detailsScreen));
+        movieDetailAdapter.notifyDataSetChanged();
+        movieDetailRV.setAdapter(movieDetailAdapter);
+
+    }
+
     public interface MovieIdListener {
         public void setMovieId(String id);
     }
+
 }
