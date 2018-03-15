@@ -49,8 +49,6 @@ public class MovieDetailsService {
     public static String movieId = "CRAP_BY_AKASH";
     private String movieDetailUrl
             = "http://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c";
-    private String posterUrl
-            = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c&append_to_response=images";
     private String castUrl
             = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c&append_to_response=cast";
     private String crewUrl
@@ -65,7 +63,7 @@ public class MovieDetailsService {
     OkHttpClient okHttpClient = new OkHttpClient();
     Request request;
     JSONObject jsonObject;
-//    public static MovieDetailsModel movieDetailsModel;
+
 
     public void getMovieDetail() {
         String url = movieDetailUrl;
@@ -115,10 +113,6 @@ public class MovieDetailsService {
 
     }
 
-    public void getPoster() {
-
-
-    }
 
     public void getTrailer() {
 
