@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.akashdubey.imdb.model.MovieDetailsModel;
+import com.akashdubey.imdb.network.CastService;
 import com.akashdubey.imdb.network.MovieDetailsService;
 import com.akashdubey.imdb.network.PosterService;
 import com.akashdubey.imdb.network.TrailerService;
@@ -30,6 +31,8 @@ public class DetailsScreen extends AppCompatActivity implements MovieIdListener{
         MovieDetailsModel.movieDetailsModelList.clear();
         MovieDetailsModel.posterModelList.clear();
         MovieDetailsModel.trailerModelList.clear();
+        MovieDetailsModel.castModelList.clear();
+        MovieDetailsModel.crewModelList.clear();
     }
 
     @Override
@@ -39,7 +42,7 @@ public class DetailsScreen extends AppCompatActivity implements MovieIdListener{
         movieDetailRV=findViewById(R.id.movieDetailRV);
         posterRV=findViewById(R.id.posterRV);
         trailerRV=findViewById(R.id.trailerRV);
-        castRV=findViewById(R.id.castRV);
+        castRV=findViewById(R.id.dtlCastRV);
         crewRV=findViewById(R.id.crewRV);
         movieId=getIntent().getExtras().getString("movieId");
         movieIdListener.setMovieId(movieId);
@@ -52,7 +55,10 @@ public class DetailsScreen extends AppCompatActivity implements MovieIdListener{
         TrailerService trailerService=new TrailerService();
         trailerService.getTrailer();
 
-        Toast.makeText(this, "Movie Id "+getIntent().getExtras().getString("movieId"), Toast.LENGTH_LONG).show();
+        CastService castService= new CastService();
+        castService.getCast();
+
+//        Toast.makeText(this, "Movie Id "+getIntent().getExtras().getString("movieId"), Toast.LENGTH_LONG).show();
     }
 
 

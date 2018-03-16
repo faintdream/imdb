@@ -48,7 +48,7 @@ public class PosterService {
 
     public void getPoster() {
         String url = posterUrl;
-        Log.i("LEGO", url);
+//        Log.i("LEGO", url);
         request = new Request.Builder().url(url).build();// building the http url to fetch poster path
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -67,7 +67,7 @@ public class PosterService {
                         jsonObject3 = jsonArray.getJSONObject(i);
 //                        Log.i("LEGO", "path:" + jsonObject3.getString(POSTER_PATH).toString());
                         imgBaseUrl = "https://image.tmdb.org/t/p/w45" + jsonObject3.getString(POSTER_PATH);
-                        Log.i("LEGO", "url:" + imgBaseUrl);
+//                        Log.i("LEGO", "url:" + imgBaseUrl);
                         posterModelList.add(new MovieDetailsModel(imgBaseUrl));
                         detailsScreen.runOnUiThread(new Runnable() {
                             @Override
@@ -94,7 +94,6 @@ public class PosterService {
                 = new LinearLayoutManager(detailsScreen, LinearLayoutManager.HORIZONTAL, false);
         posterAdapter = new PosterAdapter(posterModelList);
         posterRV.setLayoutManager(layoutManager);
-
         posterAdapter.notifyDataSetChanged();
         posterRV.setAdapter(posterAdapter);
     }

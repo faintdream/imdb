@@ -42,7 +42,7 @@ public class TrailerService {
     private String imgBaseUrl;
     OkHttpClient okHttpClient = new OkHttpClient();
     Request request;
-    JSONObject jsonObject1, jsonObject2, jsonObject3;
+    JSONObject jsonObject1, jsonObject2;
     JSONArray jsonArray;
 
     public void getTrailer() {
@@ -97,4 +97,6 @@ public class TrailerService {
         trailerAdapter.notifyDataSetChanged();
         trailerRV.setAdapter(trailerAdapter);
     }
+
+
 }

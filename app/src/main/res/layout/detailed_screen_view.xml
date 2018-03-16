@@ -82,7 +82,7 @@
                     android:id="@+id/trailerRV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/dtlArrow2IV" />
+                    />
 
 
             </RelativeLayout>
@@ -95,9 +95,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
 
 
                 <ImageView
@@ -116,11 +116,11 @@
                     android:text="Casts" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/castRV"
+                    android:id="@+id/dtlCastRV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/dtlArrow3IV" />
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
         </android.support.v7.widget.CardView>
 

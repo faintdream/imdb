@@ -21,22 +21,46 @@ public class MovieDetailsModel {
     private String mTrailerKey;
     private String mTrailerName;
     private String mCastImage;
+    private String mCastTitle;
     private String mCrewImage;
+    private String mCrewTitle;
     private String mVoteCount;
+    private String dummy1,dummy2;
     private boolean isFavourite,isWatchLater;
     private RatingBar ratings;
 
     public static List<MovieDetailsModel> movieDetailsModelList = new ArrayList<>();
     public static List<MovieDetailsModel> posterModelList= new ArrayList<>();
     public static List<MovieDetailsModel> trailerModelList=new ArrayList<>();
+    public static List<MovieDetailsModel> castModelList= new ArrayList<>();
+    public static List<MovieDetailsModel>crewModelList=new ArrayList<>();
+
+
+
+
+    public MovieDetailsModel(String dummy1,String mCastImage, String mCastTitle) {
+        this.mCastImage = mCastImage;
+        this.mTrailerName = mTrailerName;
+    }
+
+    public MovieDetailsModel(String dummy2,String dummy1,String mCastImage, String mCastTitle) {
+        this.mCastImage = mCastImage;
+        this.mTrailerName = mTrailerName;
+
+    }
 
     public MovieDetailsModel(String mTrailerKey, String mTrailerName) {
         this.mTrailerKey = mTrailerKey;
         this.mTrailerName = mTrailerName;
     }
 
-    public String getmTrailerName() {
-        return mTrailerName;
+
+    public String getmCastTitle() {
+        return mCastTitle;
+    }
+
+    public String getmCrewTitle() {
+        return mCrewTitle;
     }
 
     public MovieDetailsModel(String mMovieImage, String mTitle, String mReleaseDate, String mVoteAverage, String mOverview, String mBudget, String mRevenue, String mVoteCount) {
@@ -122,6 +146,11 @@ public class MovieDetailsModel {
     public RatingBar getRatings() {
         return ratings;
     }
+
+    public String getmTrailerName() {
+        return mTrailerName;
+    }
+
 
 
 }
