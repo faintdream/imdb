@@ -114,9 +114,6 @@ public class MovieDetailsService {
     }
 
 
-    public void getTrailer() {
-
-    }
 
     public void getCast() {
 

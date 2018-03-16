@@ -18,7 +18,8 @@ public class MovieDetailsModel {
     private String mOverview;
     private String mBudget;
     private String mRevenue;
-    private String mTrailerImage;
+    private String mTrailerKey;
+    private String mTrailerName;
     private String mCastImage;
     private String mCrewImage;
     private String mVoteCount;
@@ -27,8 +28,16 @@ public class MovieDetailsModel {
 
     public static List<MovieDetailsModel> movieDetailsModelList = new ArrayList<>();
     public static List<MovieDetailsModel> posterModelList= new ArrayList<>();
+    public static List<MovieDetailsModel> trailerModelList=new ArrayList<>();
 
+    public MovieDetailsModel(String mTrailerKey, String mTrailerName) {
+        this.mTrailerKey = mTrailerKey;
+        this.mTrailerName = mTrailerName;
+    }
 
+    public String getmTrailerName() {
+        return mTrailerName;
+    }
 
     public MovieDetailsModel(String mMovieImage, String mTitle, String mReleaseDate, String mVoteAverage, String mOverview, String mBudget, String mRevenue, String mVoteCount) {
         this.mMovieImage=mMovieImage;
@@ -58,8 +67,8 @@ public class MovieDetailsModel {
         return mTitle;
     }
 
-    public String getmTrailerImage() {
-        return mTrailerImage;
+    public String getmTrailerKey() {
+        return mTrailerKey;
     }
 
     public String getmCastImage() {

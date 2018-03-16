@@ -27,7 +27,7 @@ import static com.akashdubey.imdb.model.MovieDetailsModel.posterModelList;
 import static com.akashdubey.imdb.network.MovieDetailsService.movieId;
 
 /**
- * Created by homepc on 15-03-2018.
+ * this class handles the web service fetch for posters for corresponding moveid
  */
 
 public class PosterService {
@@ -65,7 +65,7 @@ public class PosterService {
                     jsonArray = jsonObject2.getJSONArray(POSTER);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         jsonObject3 = jsonArray.getJSONObject(i);
-                        Log.i("LEGO", "path:" + jsonObject3.getString(POSTER_PATH).toString());
+//                        Log.i("LEGO", "path:" + jsonObject3.getString(POSTER_PATH).toString());
                         imgBaseUrl = "https://image.tmdb.org/t/p/w45" + jsonObject3.getString(POSTER_PATH);
                         Log.i("LEGO", "url:" + imgBaseUrl);
                         posterModelList.add(new MovieDetailsModel(imgBaseUrl));
