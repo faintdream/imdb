@@ -19,5 +19,9 @@
         android:layout_height="75dp"
         android:layout_below="@id/dtlCastIV"
         />
-
+    <View
+        android:layout_width="1dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="60dp"
+        android:background="@android:color/holo_red_dark"/>
 </RelativeLayout>
