@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.akashdubey.imdb.model.MovieDetailsModel;
 import com.akashdubey.imdb.network.CastService;
+import com.akashdubey.imdb.network.CrewService;
 import com.akashdubey.imdb.network.MovieDetailsService;
 import com.akashdubey.imdb.network.PosterService;
 import com.akashdubey.imdb.network.TrailerService;
@@ -57,6 +58,9 @@ public class DetailsScreen extends AppCompatActivity implements MovieIdListener{
 
         CastService castService= new CastService();
         castService.getCast();
+
+        CrewService crewService=new CrewService();
+        crewService.getCrew();
 
 //        Toast.makeText(this, "Movie Id "+getIntent().getExtras().getString("movieId"), Toast.LENGTH_LONG).show();
     }

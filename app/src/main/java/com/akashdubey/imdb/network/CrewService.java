@@ -1,5 +1,7 @@
 package com.akashdubey.imdb.network;
 
+import android.support.v7.widget.LinearLayoutManager;
+
 import com.akashdubey.imdb.DetailsScreen;
 import com.akashdubey.imdb.adapter.CrewAdapter;
 import com.akashdubey.imdb.model.MovieDetailsModel;
@@ -9,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -16,6 +19,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.akashdubey.imdb.DetailsScreen.crewRV;
 import static com.akashdubey.imdb.model.MovieDetailsModel.crewModelList;
 import static com.akashdubey.imdb.network.MovieDetailsService.movieId;
 
@@ -62,13 +66,20 @@ public class CrewService {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         jsonObject2 = jsonArray.getJSONObject(i);
                         relativePath = jsonObject2.getString(PROFILE);
-                        imgUrl = imgUrl + relativePath;
+                        imgUrl = "http://image.tmdb.org/t/p/w45" + relativePath;
                         crewModelList.add(new MovieDetailsModel(
                                 "",
                                 "",
                                 imgUrl,
                                 jsonObject2.getString(NAME)
                         ));
+
+                        detailsScreen.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                PublishResultCrew(crewModelList);
+                            }
+                        });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -78,4 +89,12 @@ public class CrewService {
 
     }
 
+    public void PublishResultCrew(List<MovieDetailsModel> crewModelList){
+        LinearLayoutManager linearLayoutManager
+                = new LinearLayoutManager(detailsScreen,LinearLayoutManager.HORIZONTAL,false);
+        crewAdapter=new CrewAdapter(crewModelList);
+        crewRV.setLayoutManager(linearLayoutManager);
+        crewAdapter.notifyDataSetChanged();
+        crewRV.setAdapter(crewAdapter);
+    }
 }

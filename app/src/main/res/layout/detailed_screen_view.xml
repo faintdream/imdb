@@ -145,7 +145,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/dtlArrow4IV" />
 
-
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
