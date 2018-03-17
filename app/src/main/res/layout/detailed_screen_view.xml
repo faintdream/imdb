@@ -95,10 +95,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
-            <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content">-->
-
 
                 <ImageView
                     android:id="@+id/dtlArrow3IV"
@@ -120,7 +116,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/dtlArrow3IV" />
-            <!--</RelativeLayout>-->
 
         </android.support.v7.widget.CardView>
 
@@ -128,11 +123,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
 
                 <ImageView
                     android:id="@+id/dtlArrow4IV"
@@ -154,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/dtlArrow4IV" />
-            </RelativeLayout>
+
 
         </android.support.v7.widget.CardView>
 

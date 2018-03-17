@@ -115,14 +115,6 @@ public class MovieDetailsService {
 
 
 
-    public void getCast() {
-
-    }
-
-    public void getCrew() {
-
-    }
-
     public void publishResultMovieDetail(List<MovieDetailsModel> movieDetailsModelList) {
         movieDetailAdapter = new MovieDetailAdapter(movieDetailsModelList);
         movieDetailRV.setLayoutManager(new LinearLayoutManager(detailsScreen));

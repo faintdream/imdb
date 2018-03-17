@@ -40,13 +40,12 @@ public class MovieDetailsModel {
 
     public MovieDetailsModel(String dummy1,String mCastImage, String mCastTitle) {
         this.mCastImage = mCastImage;
-        this.mTrailerName = mTrailerName;
+        this.mCastTitle = mCastTitle;
     }
 
-    public MovieDetailsModel(String dummy2,String dummy1,String mCastImage, String mCastTitle) {
-        this.mCastImage = mCastImage;
-        this.mTrailerName = mTrailerName;
-
+    public MovieDetailsModel(String dummy2,String dummy1,String mCrewImage, String mCrewTitle) {
+        this.mCrewImage = mCrewImage;
+        this.mCrewTitle = mCrewTitle;
     }
 
     public MovieDetailsModel(String mTrailerKey, String mTrailerName) {
