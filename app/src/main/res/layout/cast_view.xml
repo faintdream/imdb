@@ -15,8 +15,8 @@
         android:id="@+id/dtlCastTV"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_below="@id/dtlCastIV"
         />
 

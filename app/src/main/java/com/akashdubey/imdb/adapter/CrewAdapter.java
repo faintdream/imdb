@@ -36,7 +36,7 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewHolder> {
     public void onBindViewHolder(CrewHolder holder, int position) {
         MovieDetailsModel movieDetailsModel=crewAdapterList.get(position);
         if(movieDetailsModel.getmCrewImage().equals("http://image.tmdb.org/t/p/w45null")){
-            holder.crewImage.setImageResource(R.drawable.star);
+            holder.crewImage.setImageResource(R.drawable.no_image);
         }else {
             Glide.with(holder.crewImage.getContext())
                     .load(movieDetailsModel.getmCrewImage())

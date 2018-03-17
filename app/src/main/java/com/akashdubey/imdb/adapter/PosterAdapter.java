@@ -37,7 +37,13 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PosterHold
     @Override
     public void onBindViewHolder(PosterHolder holder, int position) {
         MovieDetailsModel movieDetailsModel=posterAdapterList.get(position);
-        Glide.with(holder.poster.getContext()).load(movieDetailsModel.getmPosterImage()).into(holder.poster);
+
+        if (movieDetailsModel.getmPosterImage().equals("http://image.tmdb.org/t/p/w45null")) {
+            holder.poster.setImageResource(R.drawable.no_image);
+        }else{
+            Glide.with(holder.poster.getContext()).load(movieDetailsModel.getmPosterImage()).into(holder.poster);
+        }
+
     }
 
     @Override

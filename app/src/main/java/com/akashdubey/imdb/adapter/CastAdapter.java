@@ -42,7 +42,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
 
         //if there is no image fetched, let's replace it by a custom image
         if (movieDetailsModel.getmCastImage().equals("http://image.tmdb.org/t/p/w45null")) {
-            holder.castImage.setImageResource(R.drawable.star);
+            holder.castImage.setImageResource(R.drawable.no_image);
         } else {
             Glide.with(holder.castImage.getContext())
                     .load(movieDetailsModel.getmCastImage())

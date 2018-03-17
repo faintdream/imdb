@@ -16,7 +16,7 @@
 
     <item
         app:showAsAction="always"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/web"
         android:id="@+id/itemWeb"
         android:title="" >
         <menu>
