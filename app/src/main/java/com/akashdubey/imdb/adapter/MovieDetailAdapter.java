@@ -1,6 +1,7 @@
 package com.akashdubey.imdb.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +36,17 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
     @Override
     public void onBindViewHolder(MovieDetailHolder holder, int position) {
         MovieDetailsModel movieDetailsModel=movieDetailAdapterList.get(position);
+        String movieTitle=movieDetailsModel.getmTitle().toString();
+        Integer length;
+        if (movieTitle.length()>100) {
+            length = 100;
+        }else{
+            length = 50;
+        }
         Glide.with(holder.movieImage.getContext()).load(movieDetailsModel.getmMovieImage()).into(holder.movieImage);
         holder.movieTitle.setText(movieDetailsModel.getmTitle());
-        holder.rating.getRating();
-        holder.movieOverview.setText(movieDetailsModel.getmOverview());
+        holder.rating.setRating(Float.parseFloat(movieDetailsModel.getmVoteCount()));
+        holder.movieOverview.setText(movieDetailsModel.getmOverview().substring(0,length)+"...");
         holder.movieFullOverview.setText(movieDetailsModel.getmOverview());
         holder.movieVoteAverage.setText(movieDetailsModel.getmVoteAverage()+"/10)");
         holder.movieVoteCount.setText(movieDetailsModel.getmVoteCount());

@@ -57,7 +57,7 @@ public class MovieDetailsService {
             = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=8496be0b2149805afa458ab8ec27560c&append_to_response=trailer";
     private String dynamicImageURL = "TBD.jpeg";
     private String imageBaseUrl =
-            "http://image.tmdb.org/t/p/w500/" + dynamicImageURL;
+            "http://image.tmdb.org/t/p/w92/" + dynamicImageURL;
 
 
     OkHttpClient okHttpClient = new OkHttpClient();
