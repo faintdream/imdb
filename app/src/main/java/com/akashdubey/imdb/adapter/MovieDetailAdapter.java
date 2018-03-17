@@ -48,11 +48,11 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
         holder.rating.setRating(Float.parseFloat(movieDetailsModel.getmVoteCount()));
         holder.movieOverview.setText(movieDetailsModel.getmOverview().substring(0,length)+"...");
         holder.movieFullOverview.setText(movieDetailsModel.getmOverview());
-        holder.movieVoteAverage.setText(movieDetailsModel.getmVoteAverage()+"/10)");
-        holder.movieVoteCount.setText(movieDetailsModel.getmVoteCount());
+        holder.movieVoteAverage.setText("("+movieDetailsModel.getmVoteAverage()+"/10)");
+        holder.movieVoteCount.setText(movieDetailsModel.getmVoteCount()+" users");
         holder.movieReleaseDate.setText(movieDetailsModel.getmReleaseDate());
-        holder.movieBudget.setText(movieDetailsModel.getmBudget());
-        holder.movieRevenue.setText(movieDetailsModel.getmRevenue());
+        holder.movieBudget.setText("Budget: "+movieDetailsModel.getmBudget());
+        holder.movieRevenue.setText("Revenue: "+movieDetailsModel.getmRevenue());
 
     }
 
