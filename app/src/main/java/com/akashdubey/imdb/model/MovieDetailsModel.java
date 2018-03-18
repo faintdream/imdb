@@ -25,6 +25,7 @@ public class MovieDetailsModel {
     private String mCrewImage;
     private String mCrewTitle;
     private String mVoteCount;
+    private String mReleaseStatus;
     private String dummy1,dummy2;
     private boolean isFavourite,isWatchLater;
     private RatingBar ratings;
@@ -62,7 +63,7 @@ public class MovieDetailsModel {
         return mCrewTitle;
     }
 
-    public MovieDetailsModel(String mMovieImage, String mTitle, String mReleaseDate, String mVoteAverage, String mOverview, String mBudget, String mRevenue, String mVoteCount) {
+    public MovieDetailsModel(String mMovieImage, String mTitle, String mReleaseDate, String mVoteAverage, String mOverview, String mBudget, String mRevenue, String mVoteCount, String mReleaseStatus) {
         this.mMovieImage=mMovieImage;
         this.mTitle = mTitle;
         this.mReleaseDate = mReleaseDate;
@@ -71,6 +72,7 @@ public class MovieDetailsModel {
         this.mBudget = mBudget;
         this.mRevenue = mRevenue;
         this.mVoteCount = mVoteCount;
+        this.mReleaseStatus=mReleaseStatus;
     }
 
     public static List<MovieDetailsModel> getMovieDetailsModelList() {
@@ -150,6 +152,7 @@ public class MovieDetailsModel {
         return mTrailerName;
     }
 
-
-
+    public String getmReleaseStatus() {
+        return mReleaseStatus;
+    }
 }

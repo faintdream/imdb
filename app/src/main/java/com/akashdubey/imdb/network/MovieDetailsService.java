@@ -32,10 +32,10 @@ public class MovieDetailsService {
 //            mPosterImage, mVoteAverage, mOverview, mBudget, mRevenue,
 //            mTrailerImage, mCastImage, mCrewImage, mVoteCount;
 
-    DetailsScreen detailsScreen= new DetailsScreen();
+    DetailsScreen detailsScreen = new DetailsScreen();
     MovieDetailAdapter movieDetailAdapter;
     private boolean isFavourite, isWatchLater;
-    private static final String MOVIE_IMAGE="poster_path";
+    private static final String MOVIE_IMAGE = "poster_path";
     private static final String BUDGET = "budget";
     private static final String REVENUE = "revenue";
     private static final String TITLE = "original_title";
@@ -43,7 +43,7 @@ public class MovieDetailsService {
     private static final String RELEASE_DATE = "release_date";
     private static final String VOTE_AVERAGE = "vote_average";
     private static final String VOTE_COUNT = "vote_count";
-
+    private static final String RELEASE_STATUS = "status";
 
 
     public static String movieId = "CRAP_BY_AKASH";
@@ -79,7 +79,7 @@ public class MovieDetailsService {
                 String myResponse = response.body().string().toString(); // collecting the result in String object
                 try {
                     jsonObject = new JSONObject(myResponse);
-                    dynamicImageURL=jsonObject.getString(MOVIE_IMAGE);
+                    dynamicImageURL = jsonObject.getString(MOVIE_IMAGE);
                     imageBaseUrl =
                             "http://image.tmdb.org/t/p/w500/" + dynamicImageURL;
                     movieDetailsModelList.add(new MovieDetailsModel(
@@ -90,7 +90,8 @@ public class MovieDetailsService {
                                     jsonObject.getString(OVERVIEW),
                                     jsonObject.getString(BUDGET),
                                     jsonObject.getString(REVENUE),
-                                    jsonObject.getString(VOTE_COUNT)
+                                    jsonObject.getString(VOTE_COUNT),
+                                    jsonObject.getString(RELEASE_STATUS)
 
                             )
                     );
@@ -112,7 +113,6 @@ public class MovieDetailsService {
         });
 
     }
-
 
 
     public void publishResultMovieDetail(List<MovieDetailsModel> movieDetailsModelList) {

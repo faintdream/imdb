@@ -53,6 +53,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
         holder.movieReleaseDate.setText(movieDetailsModel.getmReleaseDate());
         holder.movieBudget.setText("Budget: "+movieDetailsModel.getmBudget());
         holder.movieRevenue.setText("Revenue: "+movieDetailsModel.getmRevenue());
+        holder.movieReleaseStatus.setText(movieDetailsModel.getmReleaseStatus());
 
     }
 
@@ -66,7 +67,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
         ImageView movieImage,movieFavourite,movieWatchLater;
         RatingBar rating;
         TextView movieTitle,movieOverview,movieReleaseDate,movieBudget,movieRevenue,
-        movieFullOverview,movieVoteCount,movieVoteAverage;
+        movieFullOverview,movieVoteCount,movieVoteAverage,movieReleaseStatus;
         public MovieDetailHolder(View itemView) {
             super(itemView);
             movieImage=itemView.findViewById(R.id.dtlPosterIV);
@@ -81,6 +82,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
             movieFullOverview=itemView.findViewById(R.id.dtlFullOverviewTV);
             movieFavourite=itemView.findViewById(R.id.dtlFavouriteIV);
             movieWatchLater=itemView.findViewById(R.id.dtlWatchLaterIV);
+            movieReleaseStatus=itemView.findViewById(R.id.dtlReleaseStatusTV);
         }
     }
 
