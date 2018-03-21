@@ -8,13 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.akashdubey.imdb.R;
+import com.akashdubey.imdb.db.DbHelper;
 import com.akashdubey.imdb.model.MovieDetailsModel;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.akashdubey.imdb.db.DbHelper.dbHelper;
 
 /**
  * Created by homepc on 13-03-2018.
@@ -34,8 +38,8 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
     }
 
     @Override
-    public void onBindViewHolder(MovieDetailHolder holder, int position) {
-        MovieDetailsModel movieDetailsModel=movieDetailAdapterList.get(position);
+    public void onBindViewHolder(final MovieDetailHolder holder, int position) {
+        final MovieDetailsModel movieDetailsModel=movieDetailAdapterList.get(position);
         String movieTitle=movieDetailsModel.getmTitle().toString();
         Integer length;
         if (movieTitle.length()>100) {
@@ -54,7 +58,15 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
         holder.movieBudget.setText("Budget: "+movieDetailsModel.getmBudget());
         holder.movieRevenue.setText("Revenue: "+movieDetailsModel.getmRevenue());
         holder.movieReleaseStatus.setText(movieDetailsModel.getmReleaseStatus());
+        holder.movieFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Log.i("LEGO","NAME: "+movieDetailsModel.getmTitle());
+                dbHelper=new DbHelper(holder.movieFavourite.getContext());
+                dbHelper.openConnection();
 
+            }
+        });
     }
 
     @Override

@@ -5,7 +5,8 @@ package com.akashdubey.imdb.db;
  */
 
 public class Constants {
-    public static final String DB_NAME="tmdb";
+    public static  final  Integer DB_VERSION=1;
+    public static final String DB_NAME="tmdb.db";
     public static final String TABLE_NAME="movie_details";
     public static final String ID="id";
     public static final String TITLE="movie_title";

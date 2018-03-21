@@ -2,7 +2,10 @@ package com.akashdubey.imdb.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import com.akashdubey.imdb.db.Constants;
 
 import static com.akashdubey.imdb.db.Constants.*;
@@ -22,23 +25,30 @@ public class Db extends SQLiteOpenHelper{
             VOTE_AVERAGE+" VARCHAR, "+
             VOTE_COUNT+" VARCHAR, "+
             IS_FAVOURITE+" VARCHAR, "+
-            IS_WATCHLIST+" VARCHAR, UNIQUE ON CONFLICT REPLACE );";
+            IS_WATCHLIST+" VARCHAR UNIQUE ON CONFLICT REPLACE );";
 
 
 
     public Db(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
-//        this.context=context;
+        this.context=context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(query);
+        Log.i("LEGO","schema:"+ query);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        context.deleteDatabase(DB_NAME);
+        try {
+            sqLiteDatabase.delete(TABLE_NAME, null, null);
+            sqLiteDatabase.execSQL(query);
+            Log.i("LEGO", "onUpgrade() : " + query);
+        }catch (SQLiteException e){
+            e.printStackTrace();
+        }
     }
 }
