@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import static com.akashdubey.imdb.db.Constants.*;
+
 import com.akashdubey.imdb.adapter.UserMovieListAdapter;
 
 import static com.akashdubey.imdb.MainActivity.recyclerView;
@@ -22,37 +23,52 @@ import static com.akashdubey.imdb.db.DbHelper.sqLiteDatabase;
 public class UserMovieList extends AppCompatActivity {
     RecyclerView umlRV;
     Cursor cursor;
-//    private CursorListener cursorListener;
+
+    //    private CursorListener cursorListener;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_movie_list_view);
         umlRV = findViewById(R.id.umlRV);
-        String [] args={"yes"};
+        String category = getIntent().getExtras().getString("search");
+        String[] args = {"yes"};
         dbHelper.openConnection();
-        cursor = sqLiteDatabase.query(TABLE_NAME,
-                new String[]{ID, TITLE, RELEASE_DATE, POSTER_PATH, POPULARITY, VOTE_AVERAGE,
-                        VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, IS_FAVOURITE + "=?"
-                , args, null, null, null);
-        if (cursor.getCount()<1){
-            Toast.makeText(this, "Try adding some of your favourite movies ", Toast.LENGTH_LONG).show();
-        }else{
-                publishResultUserList(cursor);
-
+        switch (category) {
+            case "favourites":
+                cursor = sqLiteDatabase.query(TABLE_NAME,
+                        new String[]{ID, TITLE, RELEASE_DATE, POSTER_PATH, POPULARITY, VOTE_AVERAGE,
+                                VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, IS_FAVOURITE + "=?"
+                        , args, null, null, null);
+                break;
+            case "watchlater":
+                cursor = sqLiteDatabase.query(TABLE_NAME,
+                        new String[]{ID, TITLE, RELEASE_DATE, POSTER_PATH, POPULARITY, VOTE_AVERAGE,
+                                VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, IS_WATCHLIST + "=?"
+                        , args, null, null, null);
+                break;
         }
 
+//        cursor = sqLiteDatabase.query(TABLE_NAME,
+//                new String[]{ID, TITLE, RELEASE_DATE, POSTER_PATH, POPULARITY, VOTE_AVERAGE,
+//                        VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, IS_FAVOURITE + "=?"
+//                , args, null, null, null);
+        if (cursor.getCount() < 1) {
+            Toast.makeText(this, "Try adding some movies ", Toast.LENGTH_LONG).show();
+        } else {
+            publishResultUserList(cursor);
+
+        }
 
 
     }
-        private void publishResultUserList(Cursor cursor) {
+
+    private void publishResultUserList(Cursor cursor) {
 //        MainActivity mainActivity = new MainActivity();
-            UserMovieListAdapter userMovieListAdapter = new UserMovieListAdapter(cursor);
-            umlRV.setLayoutManager(new LinearLayoutManager(this));
-            userMovieListAdapter.notifyDataSetChanged();
-            umlRV.setAdapter(userMovieListAdapter);
-        }
-
-
+        UserMovieListAdapter userMovieListAdapter = new UserMovieListAdapter(cursor);
+        umlRV.setLayoutManager(new LinearLayoutManager(this));
+        userMovieListAdapter.notifyDataSetChanged();
+        umlRV.setAdapter(userMovieListAdapter);
+    }
 
 
 }

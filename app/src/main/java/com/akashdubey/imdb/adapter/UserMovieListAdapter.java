@@ -38,6 +38,13 @@ public class UserMovieListAdapter extends RecyclerView.Adapter<UserMovieListAdap
             umlCursor.moveToPosition(position);
             Glide.with(holder.movieImage.getContext()).load(umlCursor.getString(umlCursor.getColumnIndex(POSTER_PATH))).into(holder.movieImage);
             holder.movieTitle.setText(umlCursor.getString(umlCursor.getColumnIndex(TITLE)));
+            holder.releaseDate.setText(umlCursor.getString(umlCursor.getColumnIndex(RELEASE_DATE)));
+            holder.votesCount.setText(
+                    umlCursor.getString(umlCursor.getColumnIndex(VOTE_AVERAGE))+
+                            "/10 by " +
+                    umlCursor.getString(umlCursor.getColumnIndex(VOTE_COUNT))+
+            " Users.");
+            holder.ratings.setRating(Float.parseFloat(umlCursor.getString(umlCursor.getColumnIndex(VOTE_AVERAGE)))/2);
     }
 
     @Override

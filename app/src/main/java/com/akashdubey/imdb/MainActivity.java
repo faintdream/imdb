@@ -1,11 +1,8 @@
 package com.akashdubey.imdb;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -15,17 +12,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.akashdubey.imdb.adapter.MovieAdapter;
-import com.akashdubey.imdb.db.Db;
 import com.akashdubey.imdb.db.DbHelper;
 import com.akashdubey.imdb.network.MyWebService;
 
 import static com.akashdubey.imdb.db.DbHelper.dbHelper;
-import static com.akashdubey.imdb.db.DbHelper.sqLiteDatabase;
-import static com.akashdubey.imdb.model.MovieModel.movieModelList;
 
 public class MainActivity extends AppCompatActivity {
 public static RecyclerView recyclerView;
-
+Intent intent;
+Bundle bundle;
     public static MovieAdapter movieAdapter;
     MyWebService myWebService ;
 
@@ -64,11 +59,20 @@ public static RecyclerView recyclerView;
         switch (itemId) {
             case R.id.itemFavourite:
                 Toast.makeText(this, "Favourite movies", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(MainActivity.this,UserMovieList.class);
+                intent=new Intent(MainActivity.this,UserMovieList.class);
+                bundle = new Bundle();
+                bundle.putString("search", "favourites");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
                 break;
-            case R.id.itempWatchlist:
+            case R.id.itemWatchlist:
+                Toast.makeText(this, "Watch bucket list", Toast.LENGTH_SHORT).show();
+                intent=new Intent(MainActivity.this,UserMovieList.class);
+                bundle = new Bundle();
+                bundle.putString("search", "watchlater");
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case R.id.itemRefresh:
                 break;
