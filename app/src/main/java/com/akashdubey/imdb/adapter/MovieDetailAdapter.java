@@ -75,17 +75,14 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
             public void onClick(View view) {
                 Log.i("LEGO", "onBindViewHolder -> MovieName : " + movieDetailsModel.getmTitle());
                 Log.i("LEGO", "onBindViewHolder -> MoviePoster : " + movieDetailsModel.getmMovieImage());
-//                dbHelper = new DbHelper(holder.movieFavourite.getContext());
+
 
 
                 dbHelper.openConnection();
-//                DbHelper.getInstance(context);
-                String[] args={movieId};
-//                Cursor cursor= sqLiteDatabase.rawQuery("select * from "+TABLE_NAME+" where "+ID+"=?"+" and "+IS_FAVOURITE+"=?",new String[]{movieId,"no"});
-
+                String[] args={movieId,"no"};
                 cursor = sqLiteDatabase.query(TABLE_NAME,
                         new String[]{ID, TITLE, RELEASE_DATE, POSTER_PATH, POPULARITY, VOTE_AVERAGE,
-                                VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, ID + "=?"
+                                VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, ID + "=?" +"AND " + IS_WATCHLIST+"=?"
                         , args, null, null, null);
                 ContentValues cv = new ContentValues();
                 if (cursor.getCount()<1) {
@@ -99,6 +96,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
                     cv.put(IS_FAVOURITE, "yes");
                     cv.put(IS_WATCHLIST,"no");
                     sqLiteDatabase.insert(TABLE_NAME, null, cv);
+                    holder.movieFavourite.setImageResource(R.drawable.favorite_enable);
 //                    cursor.close();
 
 //                    dbHelper.closeConnection();
