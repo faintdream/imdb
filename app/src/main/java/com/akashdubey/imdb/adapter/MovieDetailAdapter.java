@@ -97,9 +97,8 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
                     cv.put(IS_WATCHLIST,"no");
                     sqLiteDatabase.insert(TABLE_NAME, null, cv);
                     holder.movieFavourite.setImageResource(R.drawable.favorite_enable);
-//                    cursor.close();
-
-//                    dbHelper.closeConnection();
+                    cursor.close();
+                    dbHelper.closeConnection();
                 } else {
 
                     Toast.makeText(holder.movieFavourite.getContext(),
