@@ -1,5 +1,6 @@
 package com.akashdubey.imdb;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 public static RecyclerView recyclerView;
     public static MovieAdapter movieAdapter;
     MyWebService myWebService ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +36,6 @@ public static RecyclerView recyclerView;
         myWebService= new MyWebService();
         myWebService.getUpcomingMovies();
         dbHelper = new DbHelper(this);
-
-
     }
 
 
