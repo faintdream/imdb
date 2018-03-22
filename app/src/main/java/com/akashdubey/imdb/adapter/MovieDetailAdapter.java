@@ -72,14 +72,12 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
         holder.movieFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Log.i("LEGO", "onBindViewHolder -> MovieName : " + movieDetailsModel.getmTitle());
-//                Log.i("LEGO", "onBindViewHolder -> MoviePoster : " + movieDetailsModel.getmMovieImage());
 
                 dbHelper.openConnection();
-                String[] args = {movieId, "no"};
+                String[] args = {movieId};
                 cursor = sqLiteDatabase.query(TABLE_NAME,
                         new String[]{ID, TITLE, RELEASE_DATE, POSTER_PATH, POPULARITY, VOTE_AVERAGE,
-                                VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, ID + "=?" + "AND " + IS_FAVOURITE + "=?"
+                                VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, ID + "=?"
                         , args, null, null, null);
                 ContentValues cv = new ContentValues();
                 if (cursor.getCount() < 1) {
@@ -94,16 +92,58 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
                     cv.put(IS_WATCHLIST, "no");
                     sqLiteDatabase.insert(TABLE_NAME, null, cv);
                     holder.movieFavourite.setImageResource(R.drawable.favorite_enable);
-//                    cursor.close();
+                    cursor.close();
                     dbHelper.closeConnection();
                 } else {
 
-                    Toast.makeText(holder.movieFavourite.getContext(),
-                            "It is already in favourite list", Toast.LENGTH_SHORT).show();
+                    while (cursor.moveToNext()) {
+                        String tmpWatchList = cursor.getString(cursor.getColumnIndex(IS_WATCHLIST));
+                        String tmpfavourite = cursor.getString(cursor.getColumnIndex(IS_FAVOURITE));
+                        if (tmpfavourite.equals("no") && tmpWatchList.equals("yes")) {
+                            String[] args2 = {"no", movieId};
+                            cv.put(IS_FAVOURITE, "yes");
+                            sqLiteDatabase.update(TABLE_NAME, cv, IS_FAVOURITE + "=?" + " AND " + ID + "=?", args2);
+                            holder.movieFavourite.setImageResource(R.drawable.favorite_enable);
+                        }else{
+                            Toast.makeText(holder.movieFavourite.getContext(),
+                                    "It is already in favourite list", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
                 }
 
+//                Log.i("LEGO", "onBindViewHolder -> MovieName : " + movieDetailsModel.getmTitle());
+//                Log.i("LEGO", "onBindViewHolder -> MoviePoster : " + movieDetailsModel.getmMovieImage());
 
+//                dbHelper.openConnection();
+//                String[] args = {movieId, "no"};
+//                cursor = sqLiteDatabase.query(TABLE_NAME,
+//                        new String[]{ID, TITLE, RELEASE_DATE, POSTER_PATH, POPULARITY, VOTE_AVERAGE,
+//                                VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, ID + "=?" + "AND " + IS_FAVOURITE + "=?"
+//                        , args, null, null, null);
+//                ContentValues cv = new ContentValues();
+//                if (cursor.getCount() < 1) {
+//                    cv.put(ID, movieId);
+//                    cv.put(TITLE, movieDetailsModel.getmTitle());
+//                    cv.put(RELEASE_DATE, movieDetailsModel.getmReleaseDate());
+//                    cv.put(POSTER_PATH, movieDetailsModel.getmMovieImage());
+//                    cv.put(POPULARITY, movieDetailsModel.getmVoteCount());
+//                    cv.put(VOTE_AVERAGE, movieDetailsModel.getmVoteAverage());
+//                    cv.put(VOTE_COUNT, movieDetailsModel.getmVoteCount());
+//                    cv.put(IS_FAVOURITE, "yes");
+//                    cv.put(IS_WATCHLIST, "no");
+//                    sqLiteDatabase.insert(TABLE_NAME, null, cv);
+//                    holder.movieFavourite.setImageResource(R.drawable.favorite_enable);
+////                    cursor.close();
+//                    dbHelper.closeConnection();
+//                } else {
+//
+//                    Toast.makeText(holder.movieFavourite.getContext(),
+//                            "It is already in favourite list", Toast.LENGTH_SHORT).show();
+//
+//                }
+//
+//
             }
         });
 
@@ -155,11 +195,6 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
 
                 }
 
-//                else {
-//                    Toast.makeText(holder.movieWatchLater.getContext(),
-//                            "It is already in watch list", Toast.LENGTH_SHORT).show();
-//
-//                }
             }
         });
     }
