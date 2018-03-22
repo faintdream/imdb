@@ -1,5 +1,8 @@
 package com.akashdubey.imdb.adapter;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akashdubey.imdb.R;
+//import com.akashdubey.imdb.db.DbHelper;
 import com.akashdubey.imdb.db.DbHelper;
 import com.akashdubey.imdb.model.MovieDetailsModel;
 import com.bumptech.glide.Glide;
@@ -18,52 +22,93 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.akashdubey.imdb.db.Constants.*;
 import static com.akashdubey.imdb.db.DbHelper.dbHelper;
+import static com.akashdubey.imdb.db.DbHelper.sqLiteDatabase;
+import static com.akashdubey.imdb.network.MovieDetailsService.movieId;
 
 /**
  * Created by homepc on 13-03-2018.
  */
 
 public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.MovieDetailHolder> {
+    long result;
+    private Context context;
+    public static Cursor cursor;
     List<MovieDetailsModel> movieDetailAdapterList = new ArrayList<>();
+
     public MovieDetailAdapter(List<MovieDetailsModel> movieDetailsModels) {
-        this.movieDetailAdapterList =movieDetailsModels;
+        this.movieDetailAdapterList = movieDetailsModels;
     }
 
     @Override
     public MovieDetailHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.movie_detail_view,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.movie_detail_view, parent, false);
+        context=parent.getContext();
         return new MovieDetailHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final MovieDetailHolder holder, int position) {
-        final MovieDetailsModel movieDetailsModel=movieDetailAdapterList.get(position);
-        String movieTitle=movieDetailsModel.getmTitle().toString();
+        final MovieDetailsModel movieDetailsModel = movieDetailAdapterList.get(position);
+        String movieTitle = movieDetailsModel.getmTitle().toString();
         Integer length;
-        if (movieTitle.length()>100) {
+        if (movieTitle.length() > 100) {
             length = 100;
-        }else{
+        } else {
             length = 50;
         }
         Glide.with(holder.movieImage.getContext()).load(movieDetailsModel.getmMovieImage()).into(holder.movieImage);
         holder.movieTitle.setText(movieDetailsModel.getmTitle());
         holder.rating.setRating(Float.parseFloat(movieDetailsModel.getmVoteCount()));
-        holder.movieOverview.setText(movieDetailsModel.getmOverview().substring(0,length)+"...");
+        holder.movieOverview.setText(movieDetailsModel.getmOverview().substring(0, length) + "...");
         holder.movieFullOverview.setText(movieDetailsModel.getmOverview());
-        holder.movieVoteAverage.setText("("+movieDetailsModel.getmVoteAverage()+"/10)");
-        holder.movieVoteCount.setText(movieDetailsModel.getmVoteCount()+" users");
+        holder.movieVoteAverage.setText("(" + movieDetailsModel.getmVoteAverage() + "/10)");
+        holder.movieVoteCount.setText(movieDetailsModel.getmVoteCount() + " users");
         holder.movieReleaseDate.setText(movieDetailsModel.getmReleaseDate());
-        holder.movieBudget.setText("Budget: "+movieDetailsModel.getmBudget());
-        holder.movieRevenue.setText("Revenue: "+movieDetailsModel.getmRevenue());
+        holder.movieBudget.setText("Budget: " + movieDetailsModel.getmBudget());
+        holder.movieRevenue.setText("Revenue: " + movieDetailsModel.getmRevenue());
         holder.movieReleaseStatus.setText(movieDetailsModel.getmReleaseStatus());
         holder.movieFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Log.i("LEGO","NAME: "+movieDetailsModel.getmTitle());
-                dbHelper=new DbHelper(holder.movieFavourite.getContext());
+                Log.i("LEGO", "onBindViewHolder -> MovieName : " + movieDetailsModel.getmTitle());
+                Log.i("LEGO", "onBindViewHolder -> MoviePoster : " + movieDetailsModel.getmMovieImage());
+//                dbHelper = new DbHelper(holder.movieFavourite.getContext());
+
+
                 dbHelper.openConnection();
+//                DbHelper.getInstance(context);
+                String[] args={movieId};
+//                Cursor cursor= sqLiteDatabase.rawQuery("select * from "+TABLE_NAME+" where "+ID+"=?"+" and "+IS_FAVOURITE+"=?",new String[]{movieId,"no"});
+
+                cursor = sqLiteDatabase.query(TABLE_NAME,
+                        new String[]{ID, TITLE, RELEASE_DATE, POSTER_PATH, POPULARITY, VOTE_AVERAGE,
+                                VOTE_COUNT, IS_FAVOURITE, IS_WATCHLIST}, ID + "=?"
+                        , args, null, null, null);
+                ContentValues cv = new ContentValues();
+                if (cursor.getCount()<1) {
+                    cv.put(ID, movieId);
+                    cv.put(TITLE, movieDetailsModel.getmTitle());
+                    cv.put(RELEASE_DATE, movieDetailsModel.getmReleaseDate());
+                    cv.put(POSTER_PATH, movieDetailsModel.getmMovieImage());
+                    cv.put(POPULARITY, movieDetailsModel.getmVoteCount());
+                    cv.put(VOTE_AVERAGE, movieDetailsModel.getmVoteAverage());
+                    cv.put(VOTE_COUNT, movieDetailsModel.getmVoteCount());
+                    cv.put(IS_FAVOURITE, "yes");
+                    cv.put(IS_WATCHLIST,"no");
+                    sqLiteDatabase.insert(TABLE_NAME, null, cv);
+//                    cursor.close();
+
+//                    dbHelper.closeConnection();
+                } else {
+
+                    Toast.makeText(holder.movieFavourite.getContext(),
+                            "It is already in favourite list", Toast.LENGTH_SHORT).show();
+
+                }
+
 
             }
         });
@@ -75,26 +120,27 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
         return movieDetailAdapterList.size();
     }
 
-    public class MovieDetailHolder extends RecyclerView.ViewHolder{
-        ImageView movieImage,movieFavourite,movieWatchLater;
+    public class MovieDetailHolder extends RecyclerView.ViewHolder {
+        ImageView movieImage, movieFavourite, movieWatchLater;
         RatingBar rating;
-        TextView movieTitle,movieOverview,movieReleaseDate,movieBudget,movieRevenue,
-        movieFullOverview,movieVoteCount,movieVoteAverage,movieReleaseStatus;
+        TextView movieTitle, movieOverview, movieReleaseDate, movieBudget, movieRevenue,
+                movieFullOverview, movieVoteCount, movieVoteAverage, movieReleaseStatus;
+
         public MovieDetailHolder(View itemView) {
             super(itemView);
-            movieImage=itemView.findViewById(R.id.dtlPosterIV);
-            movieTitle=itemView.findViewById(R.id.dtlMovieTitleTV);
-            movieReleaseDate=itemView.findViewById(R.id.dtlReleaseDateTV);
-            movieBudget=itemView.findViewById(R.id.dtlBudgetTV);
-            movieRevenue=itemView.findViewById(R.id.dtlRevenueTV);
-            rating=itemView.findViewById(R.id.dtlRatingsRB);
-            movieVoteAverage=itemView.findViewById(R.id.dtlVoteAverageTV);
-            movieVoteCount=itemView.findViewById(R.id.dtlVoteCountTV);
-            movieOverview=itemView.findViewById(R.id.dtlOverviewTV);
-            movieFullOverview=itemView.findViewById(R.id.dtlFullOverviewTV);
-            movieFavourite=itemView.findViewById(R.id.dtlFavouriteIV);
-            movieWatchLater=itemView.findViewById(R.id.dtlWatchLaterIV);
-            movieReleaseStatus=itemView.findViewById(R.id.dtlReleaseStatusTV);
+            movieImage = itemView.findViewById(R.id.dtlPosterIV);
+            movieTitle = itemView.findViewById(R.id.dtlMovieTitleTV);
+            movieReleaseDate = itemView.findViewById(R.id.dtlReleaseDateTV);
+            movieBudget = itemView.findViewById(R.id.dtlBudgetTV);
+            movieRevenue = itemView.findViewById(R.id.dtlRevenueTV);
+            rating = itemView.findViewById(R.id.dtlRatingsRB);
+            movieVoteAverage = itemView.findViewById(R.id.dtlVoteAverageTV);
+            movieVoteCount = itemView.findViewById(R.id.dtlVoteCountTV);
+            movieOverview = itemView.findViewById(R.id.dtlOverviewTV);
+            movieFullOverview = itemView.findViewById(R.id.dtlFullOverviewTV);
+            movieFavourite = itemView.findViewById(R.id.dtlFavouriteIV);
+            movieWatchLater = itemView.findViewById(R.id.dtlWatchLaterIV);
+            movieReleaseStatus = itemView.findViewById(R.id.dtlReleaseStatusTV);
         }
     }
 

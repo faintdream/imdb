@@ -13,8 +13,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.akashdubey.imdb.adapter.MovieAdapter;
+import com.akashdubey.imdb.db.Db;
+import com.akashdubey.imdb.db.DbHelper;
 import com.akashdubey.imdb.network.MyWebService;
 
+import static com.akashdubey.imdb.db.DbHelper.dbHelper;
 import static com.akashdubey.imdb.model.MovieModel.movieModelList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,7 +33,7 @@ public static RecyclerView recyclerView;
         recyclerView = findViewById(R.id.recyclerview1);
         myWebService= new MyWebService();
         myWebService.getUpcomingMovies();
-
+        dbHelper = new DbHelper(this);
 
 
     }
