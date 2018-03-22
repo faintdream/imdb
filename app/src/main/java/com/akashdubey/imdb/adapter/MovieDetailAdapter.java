@@ -104,7 +104,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
                             cv.put(IS_FAVOURITE, "yes");
                             sqLiteDatabase.update(TABLE_NAME, cv, IS_FAVOURITE + "=?" + " AND " + ID + "=?", args2);
                             holder.movieFavourite.setImageResource(R.drawable.favorite_enable);
-                        }else{
+                        } else {
                             Toast.makeText(holder.movieFavourite.getContext(),
                                     "It is already in favourite list", Toast.LENGTH_SHORT).show();
                         }
@@ -185,7 +185,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
                             cv.put(IS_WATCHLIST, "yes");
                             sqLiteDatabase.update(TABLE_NAME, cv, IS_WATCHLIST + "=?" + " AND " + ID + "=?", args2);
                             holder.movieWatchLater.setImageResource(R.drawable.watchlist_enable);
-                        }else{
+                        } else {
                             Toast.makeText(holder.movieWatchLater.getContext(),
                                     "It is already in watch list", Toast.LENGTH_SHORT).show();
 

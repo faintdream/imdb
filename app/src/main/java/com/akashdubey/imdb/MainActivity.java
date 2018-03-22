@@ -1,5 +1,6 @@
 package com.akashdubey.imdb;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,10 +20,12 @@ import com.akashdubey.imdb.db.DbHelper;
 import com.akashdubey.imdb.network.MyWebService;
 
 import static com.akashdubey.imdb.db.DbHelper.dbHelper;
+import static com.akashdubey.imdb.db.DbHelper.sqLiteDatabase;
 import static com.akashdubey.imdb.model.MovieModel.movieModelList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 public static RecyclerView recyclerView;
+
     public static MovieAdapter movieAdapter;
     MyWebService myWebService ;
 
@@ -56,9 +59,14 @@ public static RecyclerView recyclerView;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int itemId = item.getItemId();
         switch (itemId) {
             case R.id.itemFavourite:
+                Toast.makeText(this, "Favourite movies", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(MainActivity.this,UserMovieList.class);
+                startActivity(intent);
+
                 break;
             case R.id.itempWatchlist:
                 break;
@@ -94,9 +102,5 @@ public static RecyclerView recyclerView;
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 
 }

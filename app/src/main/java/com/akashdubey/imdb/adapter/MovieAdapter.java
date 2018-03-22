@@ -32,6 +32,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
     private List<MovieModel> movieAdapterItem;
 
     public MovieAdapter(List<MovieModel> movieModelList) {
+
         this.movieAdapterItem = movieModelList;
     }
 
@@ -50,12 +51,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
         holder.movieTitle.setText(movieModel.getmTitle());
         holder.releaseDate.setText(movieModel.getmReleaseDate());
         holder.votesCount.setText(movieModel.getmVoteAverage() + "/ 10 voted by " + movieModel.getmVotesCount() + " ");
-        holder.ratings.setRating(Float.parseFloat(movieModel.getmVoteAverage().toString())/2);
+        holder.ratings.setRating(Float.parseFloat(movieModel.getmVoteAverage().toString()) / 2);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("LEGO","ID "+movieModel.getmId()+", NAME "+movieModel.getmTitle());
-                jumpScreen(holder.itemView,movieModel.getmId().toString());
+                Log.i("LEGO", "ID " + movieModel.getmId() + ", NAME " + movieModel.getmTitle());
+                jumpScreen(holder.itemView, movieModel.getmId().toString());
 
             }
         });
@@ -78,15 +79,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyHolder> {
             movieTitle = itemView.findViewById(R.id.movieNameTV);
             releaseDate = itemView.findViewById(R.id.releasedateTV);
             votesCount = itemView.findViewById(R.id.votesTV);
-            ratings=itemView.findViewById(R.id.ratingsRB);
+            ratings = itemView.findViewById(R.id.ratingsRB);
         }
 
 
     }
-    public void jumpScreen(View view,String movieId){
-        Intent intent=new Intent(view.getContext(),DetailsScreen.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("movieId",movieId);
+
+    public void jumpScreen(View view, String movieId) {
+        Intent intent = new Intent(view.getContext(), DetailsScreen.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("movieId", movieId);
         intent.putExtras(bundle);
         view.getContext().startActivity(intent);
 
