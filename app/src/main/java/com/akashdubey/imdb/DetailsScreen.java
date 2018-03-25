@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.akashdubey.imdb.model.MovieDetailsModel;
@@ -21,7 +22,7 @@ import static com.akashdubey.imdb.network.MovieDetailsService.*;
  */
 
 
-public class DetailsScreen extends AppCompatActivity implements MovieIdListener {
+public class DetailsScreen extends MainActivity implements MovieIdListener {
     MovieIdListener movieIdListener = (MovieIdListener) this;
     public static RecyclerView movieDetailRV, posterRV, trailerRV, castRV, crewRV;
     String movieId;
@@ -61,8 +62,6 @@ public class DetailsScreen extends AppCompatActivity implements MovieIdListener 
 
         CrewService crewService = new CrewService();
         crewService.getCrew();
-
-//        Toast.makeText(this, "Movie Id "+getIntent().getExtras().getString("movieId"), Toast.LENGTH_LONG).show();
     }
 
 
@@ -70,5 +69,10 @@ public class DetailsScreen extends AppCompatActivity implements MovieIdListener 
     public void setMovieId(String id) {
         MovieDetailsService.movieId = id;
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }

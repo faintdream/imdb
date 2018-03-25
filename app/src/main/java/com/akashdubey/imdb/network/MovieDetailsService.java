@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 
 import com.akashdubey.imdb.DetailsScreen;
+import com.akashdubey.imdb.MainActivity;
 import com.akashdubey.imdb.adapter.MovieDetailAdapter;
 import com.akashdubey.imdb.model.MovieDetailsModel;
 
@@ -34,6 +35,7 @@ public class MovieDetailsService {
 
     DetailsScreen detailsScreen = new DetailsScreen();
     MovieDetailAdapter movieDetailAdapter;
+    MainActivity mainActivity=new MainActivity();
     private boolean isFavourite, isWatchLater;
     private static final String MOVIE_IMAGE = "poster_path";
     private static final String BUDGET = "budget";
@@ -117,7 +119,7 @@ public class MovieDetailsService {
 
     public void publishResultMovieDetail(List<MovieDetailsModel> movieDetailsModelList) {
         movieDetailAdapter = new MovieDetailAdapter(movieDetailsModelList);
-        movieDetailRV.setLayoutManager(new LinearLayoutManager(detailsScreen));
+        movieDetailRV.setLayoutManager(new LinearLayoutManager(mainActivity));
         movieDetailAdapter.notifyDataSetChanged();
         movieDetailRV.setAdapter(movieDetailAdapter);
 

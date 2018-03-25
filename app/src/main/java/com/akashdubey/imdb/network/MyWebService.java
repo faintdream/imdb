@@ -1,9 +1,12 @@
 package com.akashdubey.imdb.network;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.akashdubey.imdb.DetailsScreen;
 import com.akashdubey.imdb.MainActivity;
 //import com.akashdubey.imdb.model.MovieAdapter;
+import com.akashdubey.imdb.WebList;
 import com.akashdubey.imdb.adapter.MovieAdapter;
 import com.akashdubey.imdb.model.MovieModel;
 
@@ -20,8 +23,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.akashdubey.imdb.MainActivity.movieAdapter;
-import static com.akashdubey.imdb.MainActivity.recyclerView;
+
+
+import static com.akashdubey.imdb.WebList.movieAdapter;
+import static com.akashdubey.imdb.WebList.recyclerView;
 import static com.akashdubey.imdb.model.MovieModel.movieModelList;
 //import static com.akashdubey.imdb.model.MovieModel;
 
@@ -50,7 +55,8 @@ public class MyWebService {
     public static final String MOVIE_ID = "id";
 
 
-    public MainActivity mainActivity = new MainActivity();
+//    MainActivity mainActivity = new MainActivity();
+    WebList webList=new WebList();
     OkHttpClient okHttpClient = new OkHttpClient();
     Request request;
     JSONObject jsonObject;
@@ -74,7 +80,6 @@ public class MyWebService {
                     jsonObject = new JSONObject(myResponse);
                     jsonArray = jsonObject.getJSONArray("results");
                     for (int i = 0; i < jsonArray.length(); i++) {
-
                         jsonObject = jsonArray.getJSONObject(i);
                         String imgBaseUrl = "https://image.tmdb.org/t/p/w45" + jsonObject.getString(MOVIE_IMAGE);
                         movieModelList.add(new MovieModel(
@@ -87,9 +92,10 @@ public class MyWebService {
                                         jsonObject.getString(MOVIE_ID)
                                 )
                         );
+
                     }
 
-                    mainActivity.runOnUiThread(new Runnable() {
+                    webList.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             publishResult(movieModelList);
@@ -142,7 +148,7 @@ public class MyWebService {
                         );
                     }
 
-                    mainActivity.runOnUiThread(new Runnable() {
+                    webList.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             publishResult(movieModelList);
@@ -237,7 +243,7 @@ public class MyWebService {
                         );
                     }
 
-                    mainActivity.runOnUiThread(new Runnable() {
+                    webList.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             publishResult(movieModelList);
@@ -288,7 +294,7 @@ public class MyWebService {
                         );
                     }
 
-                    mainActivity.runOnUiThread(new Runnable() {
+                    webList.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             publishResult(movieModelList);
@@ -305,10 +311,12 @@ public class MyWebService {
 
 
     private void publishResult(List<MovieModel> movieModelList) {
-//        MainActivity mainActivity = new MainActivity();
+
         movieAdapter = new MovieAdapter(movieModelList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
-        movieAdapter.notifyDataSetChanged();
+        recyclerView.setLayoutManager(new LinearLayoutManager(webList));
         recyclerView.setAdapter(movieAdapter);
+        movieAdapter.notifyDataSetChanged();
+
+
     }
 }

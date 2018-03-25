@@ -19,8 +19,8 @@ import static com.akashdubey.imdb.db.Constants.*;
 public class Db extends SQLiteOpenHelper{
     Context context;
     String query="create table if not exists "+ TABLE_NAME+"("+
-            ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            TITLE+" VARCHAR, "+
+            ID+" INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "+
+            TITLE+" VARCHAR UNIQUE, "+
             RELEASE_DATE+" VARCHAR, "+
             POSTER_PATH+" VARCHAR, "+
             POPULARITY+" VARCHAR, "+

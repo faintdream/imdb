@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import static com.akashdubey.imdb.MainActivity.movieAdapter;
+//import static com.akashdubey.imdb.MainActivity.movieAdapter;
 
 /**
  * Created by homepc on 07-03-2018.
