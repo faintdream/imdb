@@ -8,7 +8,7 @@
 
         android:title="My Favourites" />
     <item
-        android:id="@+id/itempWatchlist"
+        android:id="@+id/itemWatchlist"
         android:title="My Watchlist" />
     <item
         android:id="@+id/itemRefresh"
